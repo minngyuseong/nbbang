@@ -1,0 +1,39 @@
+nbbang.minngyuseong.com {
+  encode zstd gzip
+
+  @backend path /api/* /oauth2/* /login/* /ws /ws/*
+  handle /healthz {
+    rewrite * /actuator/health
+    reverse_proxy backend:8080
+  }
+  handle @backend {
+    reverse_proxy backend:8080
+  }
+  handle {
+    reverse_proxy frontend:80
+  }
+
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "DENY"
+    Referrer-Policy "strict-origin-when-cross-origin"
+    Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  }
+}
+
+api.nbbang.minngyuseong.com {
+  redir https://nbbang.minngyuseong.com{uri} permanent
+}
+
+assets.nbbang.minngyuseong.com {
+  root * /srv/assets
+  header Cache-Control "public, max-age=604800"
+  header X-Content-Type-Options "nosniff"
+  file_server
+}
+
+monitor.nbbang.minngyuseong.com {
+  encode zstd gzip
+  reverse_proxy grafana:3000
+}

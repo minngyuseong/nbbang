@@ -1,0 +1,4 @@
+.skeleton{border-radius:12px;background:linear-gradient(90deg,#eef0f3 25%,#f7f8fa 50%,#eef0f3 75%);background-size:200% 100%;animation:skeleton-wave 1.4s ease-in-out infinite}
+.skeleton-page{padding-top:20px}.skeleton-delay{display:grid;gap:14px;animation:skeleton-delay .18s both}.skeleton-header{width:100%;height:42px}.skeleton-title{width:65%;height:34px;margin:28px 0 8px}.skeleton-card{height:84px;border-radius:18px}.skeleton-row{height:58px}
+@keyframes skeleton-wave{to{background-position:-200% 0}}@keyframes skeleton-delay{0%,99%{opacity:0}100%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.skeleton{animation:none}}

@@ -1,0 +1,42 @@
+.history-controls {
+  display: grid;
+  grid-template-columns: 1fr 112px;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.history-controls input,
+.history-controls select {
+  min-width: 0;
+  height: 44px;
+  border: 1px solid #e3e6eb;
+  border-radius: 12px;
+  padding: 0 12px;
+  background: #fff;
+  font: inherit;
+}
+
+.history-controls input:focus,
+.history-controls select:focus {
+  outline: 2px solid #dce3ff;
+  border-color: #3156f5;
+}
+
+.audit-history {
+  margin-top: 20px;
+  border: 1px solid #e8eaf0;
+  border-radius: 16px;
+  padding: 15px;
+}
+
+.audit-history summary { cursor: pointer; font-weight: 700; }
+.audit-history > div { display: grid; margin-top: 10px; }
+.audit-history article {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 10px;
+  padding: 12px 0;
+  border-top: 1px solid #eef0f3;
+}
+.audit-history article span { grid-column: 1 / -1; color: #858c96; font-size: 12px; }
+.audit-history article small { grid-column: 2; grid-row: 1; color: #3156f5; font-weight: 700; }

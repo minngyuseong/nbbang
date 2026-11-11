@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: nbbang-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/nbbang}
+    username: ${DB_USERNAME:nbbang}
+    password: ${DB_PASSWORD:nbbang-local}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:local-placeholder}
+            client-secret: ${GOOGLE_CLIENT_SECRET:local-placeholder}
+            scope: profile,email
+          kakao:
+            client-id: ${KAKAO_CLIENT_ID:local-placeholder}
+            client-secret: ${KAKAO_CLIENT_SECRET:local-placeholder}
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            client-authentication-method: client_secret_post
+            scope: profile_nickname,profile_image
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+server:
+  forward-headers-strategy: framework
+
+app:
+  web-origin: ${WEB_ORIGIN:http://localhost:5173}
+  public-api-url: ${PUBLIC_API_URL:http://localhost:8080}
+  account-encryption-key: ${ACCOUNT_ENCRYPTION_KEY:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}
+  asset-base-url: ${ASSET_BASE_URL:https://assets.nbbang.minngyuseong.com}
+  push:
+    public-key: ${VAPID_PUBLIC_KEY:}
+    private-key: ${VAPID_PRIVATE_KEY:}
+    subject: ${VAPID_SUBJECT:mailto:admin@minngyuseong.com}
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus

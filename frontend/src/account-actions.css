@@ -1,0 +1,31 @@
+.account-list article {
+  grid-template-columns: 44px 1fr auto;
+}
+
+.account-actions {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+}
+
+.account-actions button {
+  padding: 2px 0;
+}
+
+.account-actions .danger {
+  color: #d94a4a;
+}
+
+.notice {
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #3156f5;
+  background: #edf1ff;
+}
+
+.cancel-edit {
+  height: 48px;
+  border-radius: 13px;
+  color: #68707b;
+  background: #f1f3f6;
+}

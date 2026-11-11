@@ -1,0 +1,24 @@
+server:
+  shutdown: graceful
+  servlet:
+    session:
+      timeout: 12h
+      cookie:
+        http-only: true
+        secure: true
+        same-site: lax
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 5000
+      validation-timeout: 3000
+
+management:
+  endpoint:
+    health:
+      show-details: never

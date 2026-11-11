@@ -1,0 +1,19 @@
+{
+  "annotations": { "list": [] },
+  "editable": false,
+  "panels": [
+    { "type": "stat", "title": "Backend up", "targets": [{ "expr": "up{job=\"nbbang-backend\"}" }], "gridPos": { "h": 6, "w": 6, "x": 0, "y": 0 } },
+    { "type": "timeseries", "title": "HTTP requests / second", "targets": [{ "expr": "sum(rate(http_server_requests_seconds_count{job=\"nbbang-backend\"}[5m]))" }], "gridPos": { "h": 8, "w": 9, "x": 6, "y": 0 } },
+    { "type": "timeseries", "title": "HTTP 5xx / second", "targets": [{ "expr": "sum(rate(http_server_requests_seconds_count{job=\"nbbang-backend\",status=~\"5..\"}[5m]))" }], "gridPos": { "h": 8, "w": 9, "x": 15, "y": 0 } },
+    { "type": "timeseries", "title": "JVM heap", "targets": [{ "expr": "sum(jvm_memory_used_bytes{job=\"nbbang-backend\",area=\"heap\"})" }], "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 } },
+    { "type": "timeseries", "title": "DB connection pool", "targets": [{ "expr": "hikaricp_connections_active{job=\"nbbang-backend\"}" }], "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 } }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 39,
+  "tags": ["nbbang"],
+  "templating": { "list": [] },
+  "time": { "from": "now-6h", "to": "now" },
+  "title": "NBBANG Overview",
+  "uid": "nbbang-overview",
+  "version": 1
+}

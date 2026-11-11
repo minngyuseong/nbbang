@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: nbbang
+      POSTGRES_USER: nbbang
+      POSTGRES_PASSWORD: nbbang-local
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-local-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nbbang -d nbbang"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build: ./backend
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/nbbang
+      DB_USERNAME: nbbang
+      DB_PASSWORD: nbbang-local
+      WEB_ORIGIN: http://localhost:5173
+      PUBLIC_API_URL: http://localhost:8080
+      ASSET_BASE_URL: http://localhost:5173/assets
+      ACCOUNT_ENCRYPTION_KEY: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      KAKAO_CLIENT_ID: ${KAKAO_CLIENT_ID:-local-placeholder}
+      KAKAO_CLIENT_SECRET: ${KAKAO_CLIENT_SECRET:-local-placeholder}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-local-placeholder}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-local-placeholder}
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
+      VAPID_SUBJECT: ${VAPID_SUBJECT:-mailto:admin@minngyuseong.com}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:8080
+        VITE_WS_URL: ws://localhost:8080
+    depends_on: [backend]
+    ports:
+      - "5173:80"
+
+volumes:
+  postgres-local-data:

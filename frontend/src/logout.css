@@ -1,0 +1,21 @@
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: #68707b;
+  background: #f1f3f6;
+  font-size: 12px;
+}
+
+.global-logout {
+  position: fixed;
+  top: 18px;
+  left: calc(50% + min(210px, 42vw));
+  transform: translateX(-100%);
+  z-index: 20;
+}

@@ -1,0 +1,14 @@
+.idea/
+.vscode/
+.env
+frontend/node_modules/
+frontend/dist/
+backend/.gradle/
+backend/build/
+.gradle-cache/
+.gradle-build-cache/
+backups/*.dump
+backups/*.sql
+*.log
+.DS_Store
+
